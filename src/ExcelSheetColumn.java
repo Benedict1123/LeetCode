@@ -45,7 +45,7 @@ public class ExcelSheetColumn {
      *
      * problem: 26 letters (char) 'A' to 'Z' -> 10 digits (decimal) mapping
      *
-     * 0:26 -> 0:10 conversion
+     * 0:25 -> 0:9 conversion
      *
      * */
 
