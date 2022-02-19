@@ -14,7 +14,7 @@
 
 public class InsertFive {
     /**
-     * @param a: A number
+     * @param a: A number; |a| <= 10^6
      * @return Returns the maximum number after insertion
      */
     public static int InsertFive(int a) {
@@ -26,7 +26,7 @@ public class InsertFive {
         if(a>=0){
             // keep looking for the firs time that current digit is greater than 5
             for(char eachNum: letterArray){
-                if(Integer.parseInt(Character.toString(eachNum))>5){ // if the current digit number is greater than 5, then it is necessary to put 5 before it
+                if(Integer.parseInt(Character.toString(eachNum))>=5){ // if the current digit number is greater than 5, then it is necessary to put 5 before it
                     digitIndex++;
                 }else {
                     break;
