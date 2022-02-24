@@ -40,7 +40,7 @@ public class MoneyChange {
                 children.add(targetMoney - eachNote);
             }
         }
-        memoProcess.put(targetMoney,children);
+        memoProcess.put(targetMoney,children);// insert the root record
         int result = bfs(targetMoney,children,candidateNotes);
         if(result == 0){return true;}
         return false;
