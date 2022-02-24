@@ -11,25 +11,25 @@ import java.util.*;
 
 public class MergeSortedArray {
 
-//    public static ArrayList<Integer> mergeArraySolution1(int[] arr1, int[] arr2){
-////        int[] output = new int[arr1.length+arr2.length];
-//        Set<Integer> numberSet = new HashSet<>();
-//        for(int i = 0; i<arr1.length;i++){
-//            numberSet.add(arr1[i]);
-//        }
-//        for(int j = 0; j<arr2.length;j++){
-//            numberSet.add(arr2[j]);
-//        }
-//        Iterator<Integer> it = numberSet.iterator();
-//        // Iterate HashSet with the help of hasNext() and
-//        // next() method
-//        ArrayList<Integer> output = new ArrayList<>();
-//        for(Integer set: numberSet){
-//            output.add(set);
-//        }
-//        Collections.sort(output);
-//        return output;
-//    }
+    public static ArrayList<Integer> mergeArraySolution1(int[] arr1, int[] arr2){
+//        int[] output = new int[arr1.length+arr2.length];
+        Set<Integer> numberSet = new HashSet<>();
+        for(int i = 0; i<arr1.length;i++){
+            numberSet.add(arr1[i]);
+        }
+        for(int j = 0; j<arr2.length;j++){
+            numberSet.add(arr2[j]);
+        }
+        Iterator<Integer> it = numberSet.iterator();
+        // Iterate HashSet with the help of hasNext() and
+        // next() method
+        ArrayList<Integer> output = new ArrayList<>();
+        for(Integer set: numberSet){
+            output.add(set);
+        }
+        Collections.sort(output);
+        return output;
+    }
 
 
     /**
@@ -111,7 +111,44 @@ public class MergeSortedArray {
         }
         return output;
     }
-
+        /**
+         * Use two index to control the path of a directed graph
+         *
+         * arr_1[i] -> arr_2[j] -> arr_1[i+1]......
+         *
+         * */
+        public static ArrayList<Integer> mergeArraySolution3(int[] arr1, int[] arr2){
+            ArrayList<Integer> output = new ArrayList<>();
+            int lengthA = arr1.length;
+            int lengthB = arr2.length;
+            int indexA = 0;// startpoint for arr1
+            int indexB = 0;// startpoint for arr2
+            for(int i = 0; i< lengthA+lengthB; i++){
+                if(indexA>lengthA-1 &&indexB< lengthB){ //
+                    output.add(arr2[indexB]);
+                    indexB++;
+                    continue;
+                }else if(indexA<lengthA && indexB>lengthB-1){
+                    output.add(arr1[indexA]);
+                    indexA++;
+                    continue;
+                }else if(indexA>lengthA-1 && indexB>lengthB-1){
+                    break;
+                }
+                if(arr1[indexA] == arr2[indexB]){
+                    output.add(arr1[indexA]);
+                    indexA++;
+                    indexB++;
+                }else if(arr1[indexA] > arr2[indexB]){ // the number in arr1 is greater
+                    output.add(arr2[indexB]);
+                    indexB++;
+                }else {
+                    output.add(arr1[indexA]);
+                    indexA++;
+                }
+            }
+            return output;
+    }
 
     public static void main(String[] args){
 //        int[] array1 = new int[]{1,3,4,7};
@@ -122,7 +159,7 @@ public class MergeSortedArray {
         //[1,99], [2,5,7,10]
         int[] array1 = new int[]{1,5,10,11,13,14,15,99};
         int[] array2 = new int[]{2,5,7,13,15,17};
-        ArrayList<Integer> result = mergeArraySolution2(array1, array2);
+        ArrayList<Integer> result = mergeArraySolution3(array1, array2);
         System.out.println(result);
 
     }
