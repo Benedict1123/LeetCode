@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
 /**
  *Description
  * Given an array of integers, find two numbers such that they add up to a specific target number.
@@ -55,24 +57,45 @@ public class TwoSum {
      */
     public static int[] twoSum(int[] numbers, int target) {
         // write your code here
+//        ArrayList<Arrays<Integer>>
         int[] result = new int[2];
         HashMap<Integer, Integer> pairsMap = new HashMap();
         for(int i = 0; i < numbers.length; i++){
-            if(!pairsMap.containsKey(target - numbers[i])){
-                pairsMap.put(numbers[i], i);
+            if(!pairsMap.containsKey(target - numbers[i])){ // the hashmap doesn't contain the other part for current number
+                pairsMap.put(numbers[i], i); // add the other part in the hashmap and store the index as well
             } else {
-                result[0] = pairsMap.get(target - numbers[i]);
-                result[1] = i;
+                result[0] = pairsMap.get(target - numbers[i]);  // the hashmap contains the other part for the current number, get the previous index
+                result[1] = i; // put current index
             }
         }
         return result;
     }
 
+    public static ArrayList<int[]> twoSumAllCombo(int[] numbers, int target) {
+        // write your code here
+        ArrayList<int[]> all_combo = new ArrayList<>();
+        HashMap<Integer, Integer> pairsMap = new HashMap();
+        for(int i = 0; i < numbers.length; i++){
+            if(!pairsMap.containsKey(target - numbers[i])){ // the hashmap doesn't contain the other part for current number
+                pairsMap.put(numbers[i], i); // add the other part in the hashmap and store the index as well
+            } else {
+                int[] result = new int[2];
+                result[0] = pairsMap.get(target - numbers[i]);  // the hashmap contains the other part for the current number, get the previous index
+                result[1] = i; // put current index
+                all_combo.add(result);
+            }
+        }
+        return all_combo;
+    }
+
     public static void main(String[] args){
-        int[] input = new int[]{2,7,11,15};
-        int targetNumber = 9;
+        int[] input = new int[]{2,7,11,15,3,4,1,6,5};
+        int targetNumber = 7;
         int[] result =  twoSum(input,targetNumber);
+        ArrayList<int[]> result2 =  twoSumAllCombo(input,targetNumber);
         System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.deepToString((result2.toArray())));
+
     }
 
 }
