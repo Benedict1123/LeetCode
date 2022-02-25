@@ -11,6 +11,10 @@ import java.util.HashMap;
  *
  * Please note that your returned answers (both index1 and index2) are zero-based.
  *
+ * You may assume that each input would have exactly one solution, and you may not use the same element twice.
+ *
+ * You can return the answer in any order.
+ *
  *
  * Example
  * Example 1:
@@ -79,21 +83,25 @@ public class TwoSum {
             if(!pairsMap.containsKey(target - numbers[i])){ // the hashmap doesn't contain the other part for current number
                 pairsMap.put(numbers[i], i); // add the other part in the hashmap and store the index as well
             } else {
-                int[] result = new int[2];
-                result[0] = pairsMap.get(target - numbers[i]);  // the hashmap contains the other part for the current number, get the previous index
-                result[1] = i; // put current index
-                all_combo.add(result);
+                if(numbers[i]*2 != target){
+                    int[] result = new int[2];
+                    result[0] = pairsMap.get(target - numbers[i]);  // the hashmap contains the other part for the current number, get the previous index
+                    result[1] = i; // put current index
+                    all_combo.add(result);
+                }
             }
         }
+        System.out.println(pairsMap);
         return all_combo;
     }
 
     public static void main(String[] args){
-        int[] input = new int[]{2,7,11,15,3,4,1,6,5};
-        int targetNumber = 7;
-        int[] result =  twoSum(input,targetNumber);
+//        int[] input = new int[]{2,7,11,15,3,4,1,6,5,4};
+        int[] input = new int[]{2,3,1,15,4,1,6,5,4};
+        int targetNumber = 6;
+//        int[] result =  twoSum(input,targetNumber);
         ArrayList<int[]> result2 =  twoSumAllCombo(input,targetNumber);
-        System.out.println(Arrays.toString(result));
+//        System.out.println(Arrays.toString(result));
         System.out.println(Arrays.deepToString((result2.toArray())));
 
     }
